@@ -53,7 +53,15 @@ const screenController = () => {
     resetInputField();
   }
 
+  function submitLocationInput(event) {
+    if (event.keyCode === 13) {
+      event.preventDefault();
+      displayData();
+    }
+  }
+
   submitButton.addEventListener("click", displayData);
+  locationInput.addEventListener("keyup", submitLocationInput);
 };
 
 export default screenController;
