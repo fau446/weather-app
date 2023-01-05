@@ -3,9 +3,19 @@ import weatherData from "./weatherData";
 const screenController = () => {
   const weather = weatherData();
 
+  // cache DOM
   const locationInput = document.querySelector("#location");
   const submitButton = document.querySelector("#submit");
-  // have something to switch between metric and imperial
+  const convertUnitsButton = document.querySelector("#convert-units");
+  const currentTemp = document.querySelector("#current-temp");
+  const weatherCondition = document.querySelector("#weather-condition");
+  const maxTemp = document.querySelector("#max-temp");
+  const minTemp = document.querySelector("#min-temp");
+  const feelsTemp = document.querySelector("#feels-temp");
+  const humidity = document.querySelector("#humidity");
+  const wind = document.querySelector("#wind");
+
+  let currentUnits = "metric";
 
   function fillLocationHeader() {
     const locationHeader = document.querySelector("#location-header");
@@ -22,24 +32,34 @@ const screenController = () => {
     return newStr.join(" ");
   }
 
-  function fillWeatherInfo() {
-    const currentTemp = document.querySelector("#current-temp");
-    const weatherCondition = document.querySelector("#weather-condition");
-    const maxTemp = document.querySelector("#max-temp");
-    const minTemp = document.querySelector("#min-temp");
-    const feelsTemp = document.querySelector("#feels-temp");
-    const humidity = document.querySelector("#humidity");
-    const wind = document.querySelector("#wind");
-
-    currentTemp.innerText = `${Math.floor(weather.getCurrentTemp())}\u00B0C`;
+  function fillWeatherInfo(units) {
+    if (units === "imperial") {
+      currentTemp.innerText = `${Math.floor(
+        (weather.getCurrentTemp() * 9) / 5 + 32
+      )}\u00B0F`;
+      maxTemp.innerText = `Max: ${Math.floor(
+        (weather.getMaxTemp() * 9) / 5 + 32
+      )}\u00B0F`;
+      minTemp.innerText = `Min: ${Math.floor(
+        (weather.getMinTemp() * 9) / 5 + 32
+      )}\u00B0F`;
+      feelsTemp.innerText = `Feels Like: ${Math.floor(
+        (weather.getFeelsLikeTemp() * 9) / 5 + 32
+      )}\u00B0F`;
+      wind.innerText = `Wind Speed: ${
+        Math.round(weather.getWindSpeed() * 2.237 * 100) / 100
+      } miles/hour`;
+    } else if (units === "metric") {
+      currentTemp.innerText = `${Math.floor(weather.getCurrentTemp())}\u00B0C`;
+      maxTemp.innerText = `Max: ${Math.floor(weather.getMaxTemp())}\u00B0C`;
+      minTemp.innerText = `Min: ${Math.floor(weather.getMinTemp())}\u00B0C`;
+      feelsTemp.innerText = `Feels Like: ${Math.floor(
+        weather.getFeelsLikeTemp()
+      )}\u00B0C`;
+      wind.innerText = `Wind Speed: ${weather.getWindSpeed()} meters/second`;
+    }
     weatherCondition.innerText = capatalizeFirstLetter(weather.getWeather());
-    maxTemp.innerText = `Max: ${Math.floor(weather.getMaxTemp())}\u00B0C`;
-    minTemp.innerText = `Min: ${Math.floor(weather.getMinTemp())}\u00B0C`;
-    feelsTemp.innerText = `Feels Like: ${Math.floor(
-      weather.getFeelsLikeTemp()
-    )}\u00B0C`;
     humidity.innerText = `Humidity: ${weather.getHumidity()}%`;
-    wind.innerText = `Wind Speed: ${weather.getWindSpeed()} meters/second`;
   }
 
   function resetInputField() {
@@ -47,9 +67,10 @@ const screenController = () => {
   }
 
   async function displayData() {
-    await weather.getWeatherData(locationInput.value);
+    const locationValues = locationInput.value.split(",");
+    await weather.getWeatherData(locationValues[0], locationValues[1]);
     fillLocationHeader();
-    fillWeatherInfo();
+    fillWeatherInfo(currentUnits);
     resetInputField();
   }
 
@@ -60,8 +81,25 @@ const screenController = () => {
     }
   }
 
+  function metricToImperial() {
+    currentUnits = "imperial";
+    fillWeatherInfo(currentUnits);
+    convertUnitsButton.innerText = "Metric";
+    convertUnitsButton.removeEventListener("click", metricToImperial);
+    convertUnitsButton.addEventListener("click", imperialToMetric);
+  }
+
+  function imperialToMetric() {
+    currentUnits = "metric";
+    fillWeatherInfo(currentUnits);
+    convertUnitsButton.innerText = "Imperial";
+    convertUnitsButton.removeEventListener("click", imperialToMetric);
+    convertUnitsButton.addEventListener("click", metricToImperial);
+  }
+
   submitButton.addEventListener("click", displayData);
   locationInput.addEventListener("keyup", submitLocationInput);
+  convertUnitsButton.addEventListener("click", metricToImperial);
 };
 
 export default screenController;
