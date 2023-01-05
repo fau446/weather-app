@@ -4,21 +4,21 @@ const screenController = () => {
   const weather = weatherData();
 
   // cache DOM
-  const locationInput = document.querySelector("#location");
-  const submitButton = document.querySelector("#submit");
+  const locationInput = document.querySelector(".location");
+  const submitButton = document.querySelector(".submit");
   const convertUnitsButton = document.querySelector(".convert-units");
-  const currentTemp = document.querySelector("#current-temp");
-  const weatherCondition = document.querySelector("#weather-condition");
-  const maxTemp = document.querySelector("#max-temp");
-  const minTemp = document.querySelector("#min-temp");
-  const feelsTemp = document.querySelector("#feels-temp");
-  const humidity = document.querySelector("#humidity");
-  const wind = document.querySelector("#wind");
+  const currentTemp = document.querySelector(".current-temp");
+  const weatherCondition = document.querySelector(".weather-condition");
+  const maxTemp = document.querySelector(".max-temp");
+  const minTemp = document.querySelector(".min-temp");
+  const feelsTemp = document.querySelector(".feels-temp");
+  const humidity = document.querySelector(".humidity");
+  const wind = document.querySelector(".wind");
 
   let currentUnits = "metric";
 
   function fillLocationHeader() {
-    const locationHeader = document.querySelector("#location-header");
+    const locationHeader = document.querySelector(".location-header");
     locationHeader.innerHTML = `${weather.getCityName()}, ${weather.getCountryCode()}`;
   }
 
