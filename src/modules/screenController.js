@@ -6,7 +6,7 @@ const screenController = () => {
   // cache DOM
   const locationInput = document.querySelector("#location");
   const submitButton = document.querySelector("#submit");
-  const convertUnitsButton = document.querySelector("#convert-units");
+  const convertUnitsButton = document.querySelector(".convert-units");
   const currentTemp = document.querySelector("#current-temp");
   const weatherCondition = document.querySelector("#weather-condition");
   const maxTemp = document.querySelector("#max-temp");
@@ -67,8 +67,15 @@ const screenController = () => {
   }
 
   async function displayData() {
-    const locationValues = locationInput.value.split(",");
-    await weather.getWeatherData(locationValues[0], locationValues[1]);
+    try {
+      const locationValues = locationInput.value.split(",");
+      await weather.getWeatherData(locationValues[0], locationValues[1]);
+    } catch (error) {
+      alert(error);
+      return;
+    }
+
+    convertUnitsButton.classList.remove("hidden");
     fillLocationHeader();
     fillWeatherInfo(currentUnits);
     resetInputField();

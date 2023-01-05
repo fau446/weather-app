@@ -2,6 +2,7 @@
 
 const weatherData = () => {
   let data;
+  let previousData;
 
   async function getWeatherData(city, country = "") {
     const response = await fetch(
@@ -9,7 +10,14 @@ const weatherData = () => {
       { mode: "cors" }
     );
     data = await response.json();
+    if (data.cod !== 200) {
+      let error = data.message;
+      if (error === "bad query") error = "Location cannot be blank.";
+      data = previousData;
+      throw new Error(error);
+    }
 
+    previousData = data;
     console.log(data);
   }
 
