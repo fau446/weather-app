@@ -81,7 +81,7 @@ const screenController = () => {
         break;
       case "Snow":
         body.style.backgroundImage = "url('imgs/snow.jpg')";
-        weatherInfo.style.color = "black";
+        weatherInfo.style.color = "white";
         break;
       case "Fog":
       case "Mist":
