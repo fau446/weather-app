@@ -4,6 +4,7 @@ const screenController = () => {
   const weather = weatherData();
 
   // cache DOM
+  const body = document.querySelector("body");
   const locationInput = document.querySelector(".location");
   const submitButton = document.querySelector(".submit");
   const convertUnitsButton = document.querySelector(".convert-units");
@@ -62,6 +63,34 @@ const screenController = () => {
     humidity.innerText = `Humidity: ${weather.getHumidity()}%`;
   }
 
+  function changeBackgroundImage() {
+    switch (weather.getGeneralWeather()) {
+      case "Clear":
+        body.style.backgroundImage = "url('imgs/clear.jpg')";
+        break;
+      case "Rain":
+      case "Drizzle":
+        body.style.backgroundImage = "url('imgs/rain.jpg')";
+        break;
+      case "Clouds":
+        body.style.backgroundImage = "url('imgs/clouds.jpg')";
+        break;
+      case "Snow":
+        body.style.backgroundImage = "url('imgs/snow.jpg')";
+        break;
+      case "Fog":
+      case "Mist":
+      case "Haze":
+        body.style.backgroundImage = "url('imgs/fog.jpg')";
+        break;
+      case "Thunderstorm":
+        body.style.backgroundImage = "url('imgs/thunderstorm.jpg')";
+        break;
+      default:
+        body.style.backgroundImage = "url('imgs/thunderstorm.jpg')";
+    }
+  }
+
   function resetInputField() {
     locationInput.value = "";
   }
@@ -78,6 +107,7 @@ const screenController = () => {
     convertUnitsButton.classList.remove("hidden");
     fillLocationHeader();
     fillWeatherInfo(currentUnits);
+    changeBackgroundImage();
     resetInputField();
   }
 

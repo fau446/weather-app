@@ -1,4 +1,4 @@
-// Weather conditions: clear sky, few clouds, scattered clouds, broken clouds, shower rain, rain, thunderstorm, snow, mist
+// General weather conditions: Thunderstorm, Drizzle, Rain, Snow, Clear, Clouds, Mist, Fog, "Extreme"
 
 const weatherData = () => {
   let data;
