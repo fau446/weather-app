@@ -5,6 +5,10 @@
 }
 
 body {
+  background: url(imgs/fog.jpg);
+  background-position: center;
+  background-attachment: fixed;
+  background-size: cover;
 }
 
 header {
@@ -24,6 +28,9 @@ header {
   left: 50%;
   transform: translate(-50%, 0);
   margin: auto;
+  /* color: whitesmoke;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black; */
 }
 
 .row {
