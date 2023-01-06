@@ -104,11 +104,20 @@ const screenController = () => {
   }
 
   async function displayData() {
+    const errorMessage = document.querySelector(".error");
     try {
       const locationValues = locationInput.value.split(",");
       await weather.getWeatherData(locationValues[0], locationValues[1]);
+      errorMessage.innerText = "";
+      errorMessage.classList.add("hidden");
     } catch (error) {
-      alert(error);
+      if (error.message === "400") {
+        errorMessage.innerText = "Search bar cannot be blank!";
+      } else if (error.message === "404") {
+        errorMessage.innerText =
+          "Location not found! Please enter the locaiton in the form of City, Country Code!";
+      }
+      errorMessage.classList.remove("hidden");
       return;
     }
 

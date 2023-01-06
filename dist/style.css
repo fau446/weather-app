@@ -15,7 +15,7 @@ button {
   cursor: pointer;
 }
 
-header {
+.header-top {
   display: flex;
   justify-content: space-between;
   margin: 50px 20px 0;
@@ -38,6 +38,7 @@ button {
 }
 
 input {
+  width: 300px;
   font-size: 1.3rem;
   padding: 8px 10px;
   color: white;
@@ -55,6 +56,15 @@ input:focus {
   color: whitesmoke;
 }
 
+.error {
+  color: white;
+  padding: 15px 15px;
+  margin: 10px 0 0 20px;
+  width: 300px;
+  background: rgba(194, 13, 13, 0.3);
+  border-radius: 10px;
+}
+
 .weather-info {
   display: flex;
   flex-direction: column;
@@ -66,9 +76,6 @@ input:focus {
   left: 50%;
   transform: translate(-50%, 0);
   margin: auto;
-  /* color: whitesmoke;
-  -webkit-text-stroke-width: 1px;
-  -webkit-text-stroke-color: black; */
 }
 
 .row {

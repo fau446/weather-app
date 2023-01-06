@@ -1,5 +1,3 @@
-// General weather conditions: Thunderstorm, Drizzle, Rain, Snow, Clear, Clouds, Mist, Fog, "Extreme"
-
 const weatherData = () => {
   let data;
   let previousData;
@@ -11,14 +9,12 @@ const weatherData = () => {
     );
     data = await response.json();
     if (data.cod !== 200) {
-      let error = data.message;
-      if (error === "bad query") error = "Location cannot be blank.";
+      const error = data.cod;
       data = previousData;
       throw new Error(error);
     }
 
     previousData = data;
-    console.log(data);
   }
 
   function getCurrentTemp() {

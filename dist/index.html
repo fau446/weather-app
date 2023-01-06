@@ -9,11 +9,19 @@
   </head>
   <body>
     <header>
-      <div class="left">
-        <input type="text" class="location" placeholder="City, Country Code" />
-        <button type="button" class="submit">Search</button>
+      <div class="header-top">
+        <div class="left">
+          <input
+            type="text"
+            class="location"
+            placeholder="City, Country Code"
+          />
+          <button type="button" class="submit">Search</button>
+        </div>
+        <button type="button" class="convert-units hidden">Imperial</button>
       </div>
-      <button type="button" class="convert-units hidden">Imperial</button>
+
+      <p class="error hidden"></p>
     </header>
 
     <div class="weather-info">
