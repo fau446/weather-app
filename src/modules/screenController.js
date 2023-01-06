@@ -9,6 +9,7 @@ const screenController = () => {
   const submitButton = document.querySelector(".submit");
   const convertUnitsButton = document.querySelector(".convert-units");
   const currentTemp = document.querySelector(".current-temp");
+  const weatherInfo = document.querySelector(".weather-info");
   const weatherCondition = document.querySelector(".weather-condition");
   const maxTemp = document.querySelector(".max-temp");
   const minTemp = document.querySelector(".min-temp");
@@ -63,31 +64,38 @@ const screenController = () => {
     humidity.innerText = `Humidity: ${weather.getHumidity()}%`;
   }
 
-  function changeBackgroundImage() {
+  function changeBackgroundImageandFontColor() {
     switch (weather.getGeneralWeather()) {
       case "Clear":
         body.style.backgroundImage = "url('imgs/clear.jpg')";
+        weatherInfo.style.color = "black";
         break;
       case "Rain":
       case "Drizzle":
         body.style.backgroundImage = "url('imgs/rain.jpg')";
+        weatherInfo.style.color = "white";
         break;
       case "Clouds":
         body.style.backgroundImage = "url('imgs/clouds.jpg')";
+        weatherInfo.style.color = "white";
         break;
       case "Snow":
         body.style.backgroundImage = "url('imgs/snow.jpg')";
+        weatherInfo.style.color = "black";
         break;
       case "Fog":
       case "Mist":
       case "Haze":
         body.style.backgroundImage = "url('imgs/fog.jpg')";
+        weatherInfo.style.color = "white";
         break;
       case "Thunderstorm":
         body.style.backgroundImage = "url('imgs/thunderstorm.jpg')";
+        weatherInfo.style.color = "white";
         break;
       default:
         body.style.backgroundImage = "url('imgs/thunderstorm.jpg')";
+        weatherInfo.style.color = "white";
     }
   }
 
@@ -107,7 +115,7 @@ const screenController = () => {
     convertUnitsButton.classList.remove("hidden");
     fillLocationHeader();
     fillWeatherInfo(currentUnits);
-    changeBackgroundImage();
+    changeBackgroundImageandFontColor();
     resetInputField();
   }
 
