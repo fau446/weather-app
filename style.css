@@ -5,16 +5,54 @@
 }
 
 body {
-  background: url(imgs/fog.jpg);
+  background: url(imgs/clear.jpg);
   background-position: center;
   background-attachment: fixed;
   background-size: cover;
+}
+
+button {
+  cursor: pointer;
 }
 
 header {
   display: flex;
   justify-content: space-between;
   margin: 50px 20px 0;
+}
+
+.left {
+  display: flex;
+}
+
+button {
+  background: black;
+  color: white;
+  border: none;
+  padding: 0 8px;
+  border-radius: 10px;
+}
+
+.submit {
+  border-radius: 0 10px 10px 0;
+}
+
+input {
+  font-size: 1.3rem;
+  padding: 8px 10px;
+  color: white;
+  background: rgba(0, 0, 0, 30%);
+  border: none;
+  border-bottom: 3px solid white;
+  border-radius: 10px 0 0 10px;
+}
+
+input:focus {
+  outline: none;
+}
+
+::placeholder {
+  color: whitesmoke;
 }
 
 .weather-info {
